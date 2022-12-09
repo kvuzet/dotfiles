@@ -11,6 +11,7 @@ let g:mapleader = ","
 filetype on
 filetype plugin on
 filetype indent on
+
 syntax enable
 se t_Co=256
 set termguicolors
@@ -47,8 +48,8 @@ set showcmd
 set number
 
 "Indent stuff
-set smartindent
 set autoindent
+let g:html_indent_style1 = "auto"
 
 "Always show the status line
 set laststatus=2
@@ -75,6 +76,7 @@ set mousehide
 
 " Correct mouse highlighting
 set mouse=a
+set ttymouse=sgr
 
 " session settings
 set sessionoptions=resize,winpos,winsize,buffers,tabpages,folds,curdir,help
@@ -92,7 +94,7 @@ imap jj <esc>
 if has("autocmd")
  augroup myvimrchooks
   au!
-  autocmd bufwritepost .vimrc source ~/.vimrc
+  autocmd bufwritepost .vimrc source ~/.vimrc ++nested
  augroup END
 endif
 
@@ -102,17 +104,25 @@ nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 
+" auto save when focus is lost
+au FocusLost * :wa ++nested
 
-au FocusLost * :wa
+" show matching brackets
+set showmatch
 
-set showmatch " show matching brackets
+" nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
 
-nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
+" Use f2 to toggle paste mode
+set pastetoggle=<F2>
 
-" Alphabetically sort CSS properties in file with :SortCSS
-:command! SortCSS :g#\({\n\)\@<=#.,/}/sort
+" different cursor for insert mode
+let &t_SI = "\<Esc>[6 q"
+let &t_SR = "\<Esc>[4 q"
+let &t_EI = "\<Esc>[2 q"
 
-nmap <leader>w :w!<cr>
+"More natural splitting
+set splitbelow
+set splitright
 
 "===============PLUGIN SETTINGS=============="
 
@@ -135,6 +145,7 @@ let NERDTreeShowHidden=1
 
 " Have NERDTree ignore vim swap files
 let NERDTreeIgnore = ['\.swp$']
+
 " quick shortcut for nerdtreefind
 nmap ,n :NERDTreeFind<CR>
 
@@ -150,16 +161,11 @@ nnoremap <c-p> :Files<CR>
 cnoreabbrev Ack Ack!
 nnoremap <Leader>a :Ack!<Space>
 
+"======Dispatch====="
 nnoremap <Leader>d :Dispatch<Space>
-
-"More natural splitting
-set splitbelow
-set splitright
-
 
 "=====Ale=====
 let g:ale_lint_on_text_changed = 1
-" let g:ale_fixers = ['prettier', 'eslint']
 let g:ale_linters = {
       \ 'ruby': ['standardrb', 'rubocop'],
       \ 'javascript': ['prettier', 'eslint']
@@ -168,17 +174,12 @@ let g:ale_fixers = {
       \ 'ruby': ['standardrb'],
       \ 'javascript': ['eslint'],
       \}
+
 " Fix files automatically on save
 let g:ale_fix_on_save = 1
+
 let g:ale_sign_error = '●'
 let g:ale_sign_warning = '.'
 
-set pastetoggle=<F2>
 
-set laststatus=2 " Always show statusline
-
-" different cursor for insert mode
-let &t_SI = "\<Esc>[6 q"
-let &t_SR = "\<Esc>[4 q"
-let &t_EI = "\<Esc>[2 q"
 
