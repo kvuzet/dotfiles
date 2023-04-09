@@ -94,9 +94,10 @@ imap jj <esc>
 if has("autocmd")
  augroup myvimrchooks
   au!
-  autocmd bufwritepost .vimrc source ~/.vimrc ++nested
+  autocmd bufwritepost ++nested .vimrc source ~/.vimrc
  augroup END
 endif
+" autocmd! bufwritepost ++nested .vimrc source %
 
 " easier window navigation
 nmap <C-h> <C-w>h
@@ -105,7 +106,7 @@ nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 
 " auto save when focus is lost
-au FocusLost * :wa ++nested
+" au FocusLost * :wa ++nested
 
 " show matching brackets
 set showmatch
@@ -156,6 +157,7 @@ map <leader>c <c-_><c-_>
 
 "========FZF========"
 nnoremap <c-p> :Files<CR>
+nnoremap <c-o> :Rg<CR>
 
 "========Ack========"
 cnoreabbrev Ack Ack!
