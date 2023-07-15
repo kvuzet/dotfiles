@@ -3,6 +3,7 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # Path to your oh-my-zsh installation.
 export ZSH="/home/kvuzet/.oh-my-zsh"
 
+ZSH_THEME="agnoster"
 # enable command auto-correction.
 ENABLE_CORRECTION="true"
 
@@ -25,4 +26,5 @@ export GPG_TTY=$(tty)
 
 # powerline
 eval "$(powerline-daemon -q)"
-source /home/kvuzet/.local/lib/python3.9/site-packages/powerline/bindings/zsh/powerline.zsh
+#source /home/kvuzet/.local/lib/python3.9/site-packages/powerline/bindings/zsh/powerline.zsh
+# source /usr/lib/python3/dist-packages/powerline/bindings/zsh/powerline.zsh
