@@ -26,5 +26,3 @@ export GPG_TTY=$(tty)
 
 # powerline
 eval "$(powerline-daemon -q)"
-#source /home/kvuzet/.local/lib/python3.9/site-packages/powerline/bindings/zsh/powerline.zsh
-# source /usr/lib/python3/dist-packages/powerline/bindings/zsh/powerline.zsh
