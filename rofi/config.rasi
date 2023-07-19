@@ -1,0 +1,6 @@
+configuration {
+	font: "Dank Mono 12";
+	terminal: "kitty";
+}
+
+@theme "Arc-Dark"
