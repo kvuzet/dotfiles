@@ -1,6 +1,11 @@
 configuration {
-	font: "Dank Mono 12";
-	terminal: "kitty";
+  timeout {
+      action: "kb-cancel";
+      delay:  0;
+  }
+  filebrowser {
+      directories-first: true;
+      sorting-method:    "name";
+  }
 }
-
-@theme "Arc-Dark"
+@theme "current"
