@@ -12,7 +12,7 @@ local themes_path = "~/.config/awesome/themes/"
 local theme = {}
 
 theme.font          = "Dank Mono Regular 11"
-
+theme.wibar_height  = 20
 theme.bg_normal     = "#011627"
 theme.bg_focus      = "#44596b"
 theme.bg_urgent     = "#addb67"
@@ -24,8 +24,8 @@ theme.fg_focus      = "#ffffff"
 theme.fg_urgent     = "#ffffff"
 theme.fg_minimize   = "#ffffff"
 
-theme.useless_gap   = 5
-theme.border_width  = dpi(1)
+theme.useless_gap   = 0
+theme.border_width  = dpi(0)
 theme.border_normal = "#000000"
 theme.border_focus  = "#535d6c"
 theme.border_marked = "#91231c"
@@ -71,8 +71,8 @@ theme.menu_width  = dpi(100)
 --theme.bg_widget = "#cc0000"
 
 -- Define the image to load
-theme.titlebar_close_button_normal = themes_path.."default/titlebar/close_normal.png"
-theme.titlebar_close_button_focus  = themes_path.."default/titlebar/close_focus.png"
+theme.titlebar_close_button_normal = themes_path.."nightowl/icons/titlebar/close_normal.png"
+theme.titlebar_close_button_focus  = themes_path.."nightowl/icons/titlebar/close_focus.png"
 
 theme.titlebar_minimize_button_normal = themes_path.."default/titlebar/minimize_normal.png"
 theme.titlebar_minimize_button_focus  = themes_path.."default/titlebar/minimize_focus.png"

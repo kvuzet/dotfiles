@@ -23,6 +23,7 @@ require("awful.hotkeys_popup.keys")
 -- Load Debian menu entries
 local debian = require("debian.menu")
 local has_fdo, freedesktop = pcall(require, "freedesktop")
+local battery_widget = require("battery-widget")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -232,12 +233,27 @@ awful.screen.connect_for_each_screen(function(s)
         },
         s.mytasklist, -- Middle widget
         { -- Right widgets
-            powerline_widget,
             layout = wibox.layout.fixed.horizontal,
-            --mykeyboardlayout,
+            powerline_widget,
             wibox.widget.systray(),
+            --mykeyboardlayout,
             --mytextclock,
-            s.mylayoutbox,
+						battery_widget {
+								-- Show different prefixes when charging on AC
+								ac_prefix = {
+										{ 25, "🔌🪫"},
+										{ 50, "🔌🪫"},
+										{ 75, "🔌🔋"},
+										{100, "🔌🔋"},
+								},
+								-- Show a visual indicator of charge level when on battery power
+								battery_prefix = {
+										{ 25, "🪫"},
+										{ 50, "🪫"},
+										{ 75, "🔋"},
+										{100, "🔋"},
+								}
+						}
         },
     }
 end)
@@ -253,6 +269,25 @@ root.buttons(gears.table.join(
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
+   awful.key({}, "XF86Launch1", function ()
+     awful.util.spawn("brightnessctl s 250-", false)
+     naughty.notify({ title = "Achtung!", text = "You're idling" })
+   end),
+      -- XF86Launch1
+		   -- Volume Keys
+   awful.key({}, "XF86MonBrightnessDown", function ()
+     awful.util.spawn("brightnessctl s 250-", false) end),
+   awful.key({}, "XF86MonBrightnessUp", function ()
+     awful.util.spawn("brightnessctl s +250", false) end),
+   awful.key({}, "XF86AudioLowerVolume", function ()
+     awful.util.spawn("amixer -q -D pulse sset Master 5%-", false) end),
+   awful.key({}, "XF86AudioRaiseVolume", function ()
+     awful.util.spawn("amixer -q -D pulse sset Master 5%+", false) end),
+   awful.key({}, "XF86AudioMute", function ()
+     awful.util.spawn("amixer -D pulse set Master 1+ toggle", false) end),
+   awful.key({}, "XF86AudioMicMute", function ()
+     awful.util.spawn("amixer set Capture toggle", false) end),
+
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
@@ -554,7 +589,11 @@ client.connect_signal("request::titlebars", function(c)
         end)
     )
 
-    awful.titlebar(c) : setup {
+    local top_titlebar = awful.titlebar(c, {
+        size = 20,
+    })
+
+    top_titlebar : setup {
         { -- Left
             awful.titlebar.widget.iconwidget(c),
             buttons = buttons,
