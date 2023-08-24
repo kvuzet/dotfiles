@@ -13,7 +13,7 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 # aliases
-alias t="todo.sh"
+alias t="todo-txt"
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
 alias ssh='TERM=xterm-256color ssh'

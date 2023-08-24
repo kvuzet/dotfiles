@@ -270,8 +270,7 @@ root.buttons(gears.table.join(
 -- {{{ Key bindings
 globalkeys = gears.table.join(
    awful.key({}, "XF86Launch1", function ()
-     awful.util.spawn("brightnessctl s 250-", false)
-     naughty.notify({ title = "Achtung!", text = "You're idling" })
+     awful.util.spawn("</dev/urandom tr -dc 'asdfjkl;imnewxc7' | head -c24 | sed 's/7//2g' | xclip -selection clipboard", false)
    end),
       -- XF86Launch1
 		   -- Volume Keys
@@ -558,6 +557,12 @@ awful.rules.rules = {
       }, properties = { titlebars_enabled = true }
     },
 
+    { rule = { class = "Cheese" },
+      properties = { titlebars_enabled = false } },
+    { rule = { class = "Lollypop" },
+      properties = { titlebars_enabled = false } },
+    { rule = { class = "Goodvibes" },
+      properties = { titlebars_enabled = false } },
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { screen = 1, tag = "2" } },
